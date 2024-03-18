@@ -1,23 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
 
+
+//? Component
 function App() {
+  //! JS Code
+  const deneme = "REACT"
   return (
+
+    //! JSX (HTML ile JS in birlesmis hali)
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2 style={{color: "red"}}>Hosgeldin Ya Sehri React</h2>
+      <p className="par">{deneme}</p>
     </div>
   );
 }
