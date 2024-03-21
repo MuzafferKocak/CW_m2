@@ -1,15 +1,31 @@
+// ? deafult exportun importu, istediğimiz isimle import edebiliriz
+// import MyCat from "./components/Cat";
+import Cat from "./components/Cat.jsx";
 
-
-//? Component
 function App() {
-  //! JS Code
-  const deneme = "REACT"
   return (
-
-    //! JSX (HTML ile JS in birlesmis hali)
+    //! JSX (HTML- JS'nin birleşmiş hali)
     <div className="App">
-      <h2 style={{color: "red"}}>Hosgeldin Ya Sehri React</h2>
-      <p className="par">{deneme}</p>
+      <Cat
+        name="Cenitin"
+        img="https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_1280.jpg"
+        color="grey"
+        // isBlueEyed={true}
+        isBlueEyed
+      />
+      <Cat
+        name="Garfield"
+        img="https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_1280.jpg"
+        color="blue"
+        isBlueEyed={false}
+      />
+      <Cat
+        name="Serefattin"
+        img="https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_1280.jpg"
+        isBlueEyed={false}
+      />
+      
+      {/* <MyCat /> */}
     </div>
   );
 }
