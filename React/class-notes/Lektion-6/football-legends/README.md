@@ -1,70 +1,142 @@
-# Getting Started with Create React App
+filter işlemi
+İnputa girilen veriye göre ekranda gösterilen datanın değişmesi lazım. Datayı ekrana nerede basıyoruz ? CardContainer içerisinde. O zaman inputuda card container içerisinde oluşturabiliriz.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Burada biizm örneğimizde filtreleme işlemi oyuncuların name bilgisine göre yapılıyor. Peki name e göre filtrelerken nasıl bir yol izleyeceğiz ?
 
-## Available Scripts
+String metotlarını hatırlayalım. Bu metotlardan hangisi içerisine verdiğimiz karakterleri içerip içermediğini kontrol ediyordu ? includes() metodu. Bu metot içerisine yazılan veriyi sorguladığımız string içeriyorsa true döner içermiyorsa false döner.
 
-In the project directory, you can run:
+  "araba".includes("a") => true
+  "araba".includes("ar") => true
+  "araba".includes("ara") => true
+  "araba".includes("m") => false
+Biz de burada filtreleme işleminde sorgulayacağımız string name bilgisi olacak. name bilgisi inputta yazan veriyi içeriyorsa datayı ona göre filtrelemiş olacak. Ve bu kullanıcı her inputta değişiklik yaptığında olması gerekiyor.
+Bu nedenle önce bize ne lazım inputtan gelen veri. inputtan veriyi anlık olarak nasıl yakalıyoruz ? onChange eventiyle anlık olarak değişiklikleri yakalayabiliyoruz. onChange de veriyi yakaladık ama her değişikliği algılayıp bunu ekrana yansıtacak bir şey lazım bize ama o ne ? Tabiki useState hooku. useState hooku reactta durum değişikliklerini takip eden ve o değişikliğe göre componenti yeniden render ettiren bir hook.
+  const [search,setSearch] = useState("");
 
-### `npm start`
+  ...
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  return (
+    <>
+      <input type="search" onChange={(e)=> setSearch(e.target.value)}>
+    </input>
+  )
+O zaman biz de inputtan gelen veriyi state e aktarırsak her değişklikte componenti render ettirmiş oluruz. Component her render olduğunda da filteredData yeniden oluşturulacağı için yani yeniden tanımlanacağı için kolaylıkla ekrandaki değişikliği sağlamış oluyoruz.
+const CardContainer = () => {
+  const [search, setSearch] = useState("");
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  const filteredData = data.filter(player =>
+    player.name.toLowerCase().includes(search.trim().toLowerCase())
+  );
+   return (
+    <>
+      <Form.Control
+        type="search"
+        placeholder="Search player..."
+        className="w-50 m-auto"
+        onChange={e => setSearch(e.target.value)}
+      />
+      <Container className="card-container my-4 p-3 rounded-4">
+        <Row sm={2} md={2} lg={3} xl={4} className="g-4 justify-content-center">
+          {filteredData.map((player, i) => {
+            return (
+              <Col key={i}>
+                <PlayerCard {...player} />
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
+    </>
+  );
+};
 
-### `npm test`
+export default CardContainer;
+Card Gösterilen Veriyi Değiştirme
+Bizden beklenen her carda tıklandığında o cardda değişim olması. Bizim örneğimizde resim yerine statistic bilgilerinin cardda gösterilmesi veya tam tersi resmin cardda gösterilmesi.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Ve her tıklanıldığında da ilgili cardın yeniden render olması gerekiyor. Bunu da react da yapabilmek için useState hookuna ihtiyacımız var. Ve sadece tıklanan cardın değişmesi ve tekrar o carda tıklanılana kadar değişimin sabit kalması gerektiği için her cardın kendine ait bir durumu olması lazım.
 
-### `npm run build`
+Her cardın durumu olması için de datayı maplediğimizde her veri için bir component return edersek her carda ait stateleri o component içerisinde oluşturabiliriz. Çünkü veri sayısı ne kadarsa aslında o kadar component oluşturmuş olacağımız için o component içerisinde oluşturduğumuz stateler fonksiyonlarda her veri için ayrı ayrı tanımlanmış olacak. Böylelikle her carda ait state oluşturabilmiş olacağız. Aksi takdirde veriyi datayı maplediğimiz yerde ekrana bassak elimizde tek bir state olacağı için hangi carda tıklarsak tıklayalım hepsi değişecektir.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Bu nedenle datayı üst componentte mapleyip returnde her veri için alt component olan PlayerCard componentini çağırığ verileri props yoluyla ona göndereceğiz.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+const CardContainer = () => {
+  const [search, setSearch] = useState("");
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  const filteredData = data.filter(player =>
+    player.name.toLowerCase().includes(search.trim().toLowerCase())
+  );
+   return (
+    <>
+      <Form.Control
+        type="search"
+        placeholder="Search player..."
+        className="w-50 m-auto"
+        onChange={e => setSearch(e.target.value)}
+      />
+      <Container className="card-container my-4 p-3 rounded-4">
+        <Row sm={2} md={2} lg={3} xl={4} className="g-4 justify-content-center">
+          {filteredData.map((player, i) => {
+            return (
+              <Col key={i}>
+                <PlayerCard {...player} />
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
+    </>
+  );
+};
 
-### `npm run eject`
+export default CardContainer;
+Şimdi sıra her card için durumları oluşturmaya geldi. Burada nasıl bir durum oluşturacağız ? Carda tıklanıldığında yazılar gelcek tekrar tıklanıldığında resimler gelecek. Bu değişikliği takip etmek için useState e ihtiyacımız var. Ve değşikliği yapabilmemiz için onClick eventına ihtiyacımız var.
+  const [showImg,setShowImg] = useState(true)
+State değiştikçe ilgili component render edileceği için bu state e göre bir mekanizma oluşturabiliriz. Bu mekanizmanın adı reactta conditional rendering . Bunu da JSX içerisinde ternary operator ile yapabiliriz. Yani showImg statei true ise resim gösterilecek eğer false ise name,statisticler,year gösterilecek. Peki değişim nasıl olacak ? Yani click olduğunda ne olması gerekiyor. Ve click eventını nereye tanımlayacağız? Resme tıklandığında showImage false olacak, yazılara tıklandığında showImage true olacak. Peki ayrı ayrı onClick tanımlamak yerine bunu tek bir yerden tanımlayıp hem resim olduğunda hem yazı olduğunda aynı click çalışacak ve showImage stateini tam tersine çevirebilir miyiz ? TAbi ki çevirebiliriz. onClick eventına kapsayıcıya verip ve onClick içerisinde de not ! operatörünün nimetlerinden yararlanırsak tek hamlede bu işlemi bitirebiliriz. Yani setShowImage(!showImage) dediğimizde true ise false yapacak, false ise true yapacak.
+import React, { useState } from "react";
+import Card from "react-bootstrap/Card";
+const PlayerCard = ({ name, img, statistics,official_career }) => {
+  const [showImage, setShowImage] = useState(true);
+  const handleToggle = () => setShowImage(!showImage);
+  return (
+    <Card
+        onClick={() => setShowImage(!showImage)}
+        className="player-card"
+        title={name}
+        alt={name + "image"}
+        role="button"
+      >
+        {showImage ? (
+          <Card.Img
+            variant="top"
+            src={img}
+            // onClick={() => setShowImage(false)}
+          />
+        ) : (
+          <>
+          <Card.Header >
+          <Card.Title className="my-2">{name}</Card.Title>
+           </Card.Header>
+            <ul
+              className="m-auto "
+              //   onClick={() => setShowImage(true)}
+            >
+              {statistics.map((item, i) => (
+                <li className="list-unstyled h5 text-start" key={i}>
+                  {" "}
+                  ⚽ {item}
+                </li>
+              ))}
+            </ul>
+            <span className="fw-bold my-2">
+              Career Years : {official_career}
+            </span>
+            
+          </>
+        )}
+        
+      </Card>
+  );
+};
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+export default PlayerCard;
