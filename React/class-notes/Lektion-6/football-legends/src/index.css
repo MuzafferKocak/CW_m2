@@ -23,3 +23,22 @@ body {
   border-radius: 1rem;
   display: inline-block;
 }
+
+.player-card {
+  height: 350px;
+  overflow: hidden;
+  & img {
+    /* filter:blur(3px); */
+    transition: transform 0.3s;
+    height: 100%;
+    width: 100%;
+    filter: sepia(5);
+  }
+  &:hover {
+    box-shadow: 3px 3px 20px 5px rgba(0, 0, 0, 0.5);
+    & img {
+      transform: scale(1.2);
+      filter: none;
+    }
+  }
+}
