@@ -16,7 +16,7 @@
 //* (Optional) Bir componentin guncellenmesinin hemen sonrasi (componentDidUpdate)
 //* Bir component'in DOM agacindan kaldirilmasi sonrasi(componentWillUnmount)
 
-import React, { Component } from "react"
+import React from "react"
 
 class LifeCycleMethods extends React.Component {
   //! 1-) Bir componentin olusturulmasinda cagrilir

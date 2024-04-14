@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="container text-center mt-4">
-    <button className="btn btn-danger" onClick={()=> setGöster(!göster)}>{göster ? "Gizle" : "göster"}</button>
+    <button className="btn btn-danger" onClick={()=> setGöster(!göster)}>{göster ? "Gizle" : "Göster"}</button>
 
     {/* {göster && <LifeCycleMethods />} */}
     {/* {göster && <UseEffectHook />} */}

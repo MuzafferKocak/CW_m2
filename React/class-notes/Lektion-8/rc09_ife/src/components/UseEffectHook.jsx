@@ -23,13 +23,7 @@
 //!   };
 //! }, []);
 
-//! useEffect(() => {
-//*   //* componentDidMount code + componentDidUpdate code */
 
-//!   return () => {
-//*     //* componentWillUnmount code */
-//!   };
-//! }, [state1, state2]); //? Dependency Array
 
 
 
@@ -49,9 +43,9 @@ const UseEffectHook = () => {
 //     console.log("4-componentWillUnmount");
 //   }
   
-// }, []) //? dependeny array bos oldugu icin fonksiyonun gövdesi sadece ilk render sonrasinda (birkere) calisir
+// }, []) //? dependency array bos oldugu icin fonksiyonun gövdesi sadece ilk render sonrasinda (birkere) calisir
 
-//? componentDidUpdate
+//? componentDidUpdate + componentDidUpdate
 
 useEffect(() => {
   console.log("2-componentDidMount");
@@ -60,18 +54,14 @@ useEffect(() => {
 
 }, [count]) //? count state i her degisdiginde fonksioynun gövdesi tekrar calisti bu durumda gövde hem mounting de hemde updatingde calismis oldu 
 
-//?componentWillUnmount
+//? componentWillUnmount
 useEffect(()=> {
   return ()=> {
     console.log("4-componentWillUnmount");
   }
 })
 
-useEffect(()=> {
-  return()=>{
-    console.log("object");
-  }
-})
+
 
 
 console.log("1-Rendering");
