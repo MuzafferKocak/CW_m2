@@ -7,6 +7,8 @@ const AddTutorial = ({ getTutorials }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    //- TODO POST
     const newTutor = { title, description }
     postTutorial(newTutor)
     setTitle("")
