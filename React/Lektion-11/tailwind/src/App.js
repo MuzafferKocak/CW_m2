@@ -1,3 +1,4 @@
+import FlexAndResponsive from "./components/FlexAndResponsive";
 import HoverAndFocus from "./components/HoverAndFocus";
 import SpacingAndSizing from "./components/SpacingAndSizing";
 import Typografy from "./components/Typografy";
@@ -11,7 +12,8 @@ function App() {
 
     {/* <Typografy/> */}
     {/* <SpacingAndSizing/> */}
-    <HoverAndFocus/>
+    {/* <HoverAndFocus/> */}
+    <FlexAndResponsive/>
       
     </div>
   );
