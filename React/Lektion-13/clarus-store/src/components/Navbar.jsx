@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import logo from "../assets/logo.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { closeNavbar, logoutIcon, openNavbar } from "../helpers/icons";
 import { AuthContext } from "../context/AuthProvider";
 
@@ -22,6 +22,8 @@ const navigation = [
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const { logout } = useContext(AuthContext);
+  const location = useLocation()
+  console.log(location);
   return (
     <nav className="bg-navbarColor md:text-sm">
       <div className="gap-x-14 items-center max-w-screen-xl mx-auto px-4 md:flex md:px-8">
@@ -59,7 +61,7 @@ const Navbar = () => {
               >
                 <NavLink
                   to={item.path}
-                  className="block hover:bg-main rounded-full py-2 px-4 hover:text-white"
+                  className={`block hover:bg-main rounded-full py-2 px-4 hover:text-white ${location.pathname === item.path ? "underline scale-100" : ""} `} 
                 >
                   {item.title}
                 </NavLink>

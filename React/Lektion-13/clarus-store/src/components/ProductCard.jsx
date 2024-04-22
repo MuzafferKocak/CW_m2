@@ -1,10 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import ScrollToTop from "./ScrollToTop";
+
 
 const ProductCard = ({ product }) => {
   const { title, category, thumbnail, price, id } = product;
   const navigate = useNavigate();
   return (
+    <>
     <div
       className="cursor-pointer"
       onClick={() => navigate(`${id}`, { state: product })}
@@ -25,6 +28,8 @@ const ProductCard = ({ product }) => {
         <p className="text-sm font-medium text-gray-900">{price} $</p>
       </div>
     </div>
+    <ScrollToTop/>
+    </>
   );
 };
 
