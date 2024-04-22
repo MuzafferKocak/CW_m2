@@ -1,9 +1,7 @@
-import React from 'react'
+import Courses from "../components/Courses";
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+  return <Courses />;
+};
 
-export default Home
+export default Home;

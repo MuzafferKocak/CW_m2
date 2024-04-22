@@ -12,7 +12,7 @@ const Login = () => {
       console.log({ email, pass });
       login({ email, pass });
     } else {
-      alert("Kullanıcı bilgileri yanlış");
+      alert("Kullanici bilgileri yanliş");
     }
   };
   return (
