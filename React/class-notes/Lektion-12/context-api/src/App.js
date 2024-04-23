@@ -7,10 +7,20 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import PersonDetail from "./pages/PersonDetail"
 import Login from "./pages/Login"
 import PrivateRouter from "./pages/PrivateRouter"
+import { LoginContext } from "./components/context/LoginContext"
+import { useState } from "react"
 
 function App() {
+  const [signed, setSigned] = useState(false)
+
+  console.log(signed);
+
+  
   return (
-    <BrowserRouter>
+    //? 2. Uygulamanin Context provideri ile sarmalamasi
+
+    <LoginContext.Provider value={{signed, setSigned}} >
+      <BrowserRouter>
       <Navs />
       <Routes>
         <Route index element={<Home />} />
@@ -26,6 +36,8 @@ function App() {
       </Routes>
       <Footer />
     </BrowserRouter>
+    </LoginContext.Provider>
+    
   )
 }
 

@@ -1,14 +1,31 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { LoginContext } from "../components/context/LoginContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
 
+  //? Login contextin okunmasi (Consuming)
+  const {signed, setSigned} = useContext(LoginContext)
+
+  const navigate = useNavigate()
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+
+    user?.email && user?.password && setSigned(true)
+    setUser({ email: "", password: "" })
+    // navigate("/people")
+    navigate(-1)  //? bir önceki adrese git
+
+   
   };
+  console.log(signed);
+  console.log(user);
 
   return (
     <Container>
