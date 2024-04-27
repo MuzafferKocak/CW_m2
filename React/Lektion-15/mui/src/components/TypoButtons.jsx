@@ -8,16 +8,17 @@ import Box from "@mui/material/Box";
 import { Stack, Button } from "@mui/material";
 
 const TypoButtons = () => {
-  return (
-    <div>
-      <Box
-        sx={{
-          display: "flex",
+    const boxStyle = {
+        display: "flex",
           flexDirection: "column",
           alignItems: "flex-end",
           p: 2,
           mt: 3,
-        }}
+    }
+  return (
+    <div>
+      <Box
+        sx={boxStyle}
       >
         <Typography variant="h1" component="h3">
           Deneme
@@ -29,6 +30,9 @@ const TypoButtons = () => {
           bu bir elementir
         </Typography>
         <Typography variant="subtitle1" color="primary">
+          bu bir elementir
+        </Typography>
+        <Typography variant="subtitle1" color="primary.light">
           bu bir elementir
         </Typography>
         <Typography variant="subtitle2" color="secondary" mt={2}>
@@ -49,6 +53,7 @@ const TypoButtons = () => {
         <Button variant="outlined" color="error">Outlined</Button>
         <Button variant="contained" color="warning">Outlined</Button>
         <Button variant="contained" sx={{color:"black", backgroundColor: "#bede", ":hover": {backgroundColor:"#3ac798ed"}}} color="warning">Outlined</Button>
+        <Button variant="contained" sx={{color:"black", backgroundColor: "secondry.light", ":hover": {backgroundColor:"#3ac798ed"}}} color="warning">Outlined</Button>
       </Stack>
     </div>
   );
