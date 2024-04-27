@@ -1,6 +1,6 @@
-import { ThemeProvider, createTheme } from "@mui/material";
+// import { ThemeProvider, createTheme } from "@mui/material";
 import Home from "./pages/Home";
-import { deepPurple, teal } from "@mui/material/colors";
+// import { deepPurple, teal } from "@mui/material/colors";
 import ThemeContextProvider from "./context/ThemeContext";
 
 function App() {

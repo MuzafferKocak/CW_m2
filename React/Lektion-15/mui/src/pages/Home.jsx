@@ -1,7 +1,7 @@
 import { CssBaseline } from "@mui/material";
 import Navbar from "../components/Navbar";
-import TextFieldComp from "../components/TextFieldComp";
-import TypoButtons from "../components/TypoButtons";
+// import TextFieldComp from "../components/TextFieldComp";
+// import TypoButtons from "../components/TypoButtons";
 import CardComp from "../components/CardComp";
 
 const Home = () => {
