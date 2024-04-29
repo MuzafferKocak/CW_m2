@@ -1,6 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 
 import "./Counter.css";
+import {
+  arttir,
+  arttirma,
+  azalt,
+  azaltma,
+  sil,
+  silme,
+} from "../store/counterReducer";
 
 const Counter = () => {
   //? Global State'den veri okimak icin useSelector() hooku kullanilir
@@ -17,12 +25,28 @@ const Counter = () => {
       <div>
         <button
           className="counter-button positive"
-          onClick={() => dispatch({ type: "ARTTIR" })}
+          onClick={() => dispatch(arttirma())}
+          // onClick={() => dispatch({ type: arttir })}
+          // onClick={() => dispatch({ type: "ARTTIR" })}
         >
           increase
         </button>
-        <button className="counter-button zero">reset</button>
-        <button className="counter-button negative">decrease</button>
+        <button
+          className="counter-button zero"
+          onClick={() => dispatch(silme())}
+          // onClick={() => dispatch({ type: sil }}
+          // onClick={() => dispatch({ type: "SIL" })}
+        >
+          reset
+        </button>
+        <button
+          className="counter-button negative"
+          onClick={() => dispatch(azaltma())}
+          // onClick={() => dispatch({ type: azalt })}
+          // onClick={() => dispatch({ type: "AZALT" })}
+        >
+          decrease
+        </button>
       </div>
     </div>
   );
