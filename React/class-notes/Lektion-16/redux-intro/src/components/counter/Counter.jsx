@@ -12,7 +12,9 @@ import {
 
 const Counter = () => {
   //? Global State'den veri okimak icin useSelector() hooku kullanilir
-  const count = useSelector((state) => state.count);
+  // const count = useSelector((state) => state.count);
+  // const count = useSelector((state) => state.counter.count);
+  const {count} = useSelector((state) => state.counter);
 
   const dispatch = useDispatch();
 
