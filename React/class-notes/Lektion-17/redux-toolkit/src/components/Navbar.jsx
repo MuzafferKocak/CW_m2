@@ -20,7 +20,7 @@ export default function Navbar() {
           >
             Clarusway News
           </Typography>
-
+          {/* //TODO Sartli button render'inin yapilmasi  */}
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
