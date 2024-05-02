@@ -8,10 +8,11 @@ const initialState = {
 };
 
 const loginSlice = createSlice({
-  name: "login",
+  name: "login",    //?action type
   initialState,
-  reducers: {
+  reducers: {      //? Reducer
     setUser: (state, action) => {
+        //? action creator funcs.
       state.user = action.payload;
     },
     clearUser: (state) => {
@@ -21,7 +22,7 @@ const loginSlice = createSlice({
 });
 
 //? oulusan action fonksiyonlari sliceAdi.actions dan destructure edilerek export edilir
-export const { setUser } = loginSlice.actions;
+export const { setUser, clearUser } = loginSlice.actions;
 
 //? yazilan silicenin reduceri siliceAdi.reducer seklinde export edilmelidir
 export default loginSlice.reducer;
