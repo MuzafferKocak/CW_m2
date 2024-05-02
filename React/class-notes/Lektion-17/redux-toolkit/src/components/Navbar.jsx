@@ -15,6 +15,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     dispatch(clearUser())
+    // dispatch(clearNewsData())
   }
   return (
     <Box sx={{ flexGrow: 1 }}>
