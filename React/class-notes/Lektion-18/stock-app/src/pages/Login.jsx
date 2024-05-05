@@ -9,22 +9,27 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { Formik, Form } from "formik";
-import { object, string, } from 'yup';
+import { object, string } from "yup";
+// import { login } from "../services/useApiRequest";
+import useApiRequest from "../services/useApiRequest";
 
 const Login = () => {
+  const {login} = useApiRequest()
   const loginSchema = object({
-    
     email: string()
-    .email("gecerli bir email griniz")
-    .required("Email zorunludur"),
-    password: string().required("Sifre zorunludur")
-    .min(8, "Sifre en az 8 karekter olmalidir")
-    .max(16, "En fazla 16 karekter olmalidir")
-    .matches(/\d+/, "Sifre en az bir rakam icermelidir")
-    .matches(/[a-z]/, "Sifre en az bir kücük harf icermelidir")
-    .matches(/[A-Z]/, "Sifre en az bir büyük harf icermelidir")
-    .matches(/[@$!%*?&]/, "Sifre en az bir özel karekter (@$!%*?&) icermelidir")
-    
+      .email("gecerli bir email griniz")
+      .required("Email zorunludur"),
+    password: string()
+      .required("Sifre zorunludur")
+      .min(8, "Sifre en az 8 karekter olmalidir")
+      .max(16, "En fazla 16 karekter olmalidir")
+      .matches(/\d+/, "Sifre en az bir rakam icermelidir")
+      .matches(/[a-z]/, "Sifre en az bir kücük harf icermelidir")
+      .matches(/[A-Z]/, "Sifre en az bir büyük harf icermelidir")
+      .matches(
+        /[@$!%*?&]/,
+        "Sifre en az bir özel karekter (@$!%*?&) icermelidir"
+      ),
   });
 
   return (
@@ -69,13 +74,23 @@ const Login = () => {
             onSubmit={(values, actions) => {
               //TODO
               //? POST (Login)
+              login(values)
               //? Toastify
               //? Global state güncellenmesi
               //? form resetleme
+              actions.resetForm();
+              actions.setSubmitting(false); //? isSubmitting
               //? navigate
             }}
           >
-            {({values, handleChange, handleBlur, touched, errors}) => (
+            {({
+              values,
+              handleChange,
+              handleBlur,
+              touched,
+              errors,
+              isSubmitting,
+            }) => (
               <Form>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                   <TextField
@@ -87,7 +102,7 @@ const Login = () => {
                     value={values.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    error= {touched.email && Boolean(errors.email) }
+                    error={touched.email && Boolean(errors.email)}
                     helperText={touched.email && errors.email}
                   />
                   <TextField
@@ -99,10 +114,14 @@ const Login = () => {
                     value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    error= {touched.password && Boolean(errors.password) }
+                    error={touched.password && Boolean(errors.password)}
                     helperText={touched.password && errors.password}
                   />
-                  <Button variant="contained" type="submit">
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
                     Submit
                   </Button>
                 </Box>
