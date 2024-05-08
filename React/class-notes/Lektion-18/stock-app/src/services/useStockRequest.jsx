@@ -1,15 +1,18 @@
 import { useDispatch } from "react-redux"
 import useAxios from "./useAxios"
+import { listAll } from "../features/firmsSlice"
 
 const useStockRequest = () => {
-  const { axiosToken } = useAxios()
+  const { axiosToken, } = useAxios()
   const dispatch = useDispatch()
 
   const getFirms = async () => {
-    // dispatch()
+    
     try {
-      const { data } = axiosToken("/firms")
-      console.log(data)
+      const { data } = await axiosToken("/firms")
+      // console.log(data)
+
+      dispatch(listAll(data.data))
       //   dispatch()
     } catch (error) {
       //   dispatch()
