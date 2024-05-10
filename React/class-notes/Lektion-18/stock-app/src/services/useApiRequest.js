@@ -10,7 +10,6 @@ import {
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import useAxios from "./useAxios"
-import useStockRequest from "./useStockRequest";
 
 //?Custom hook
 //? Eger uygulamanın her yerinde kullanmak için bazı fonksiyonlara ihtyaç varsa  ve bu fonksiyonlar içerisinde custom hook'ların ( useSelector, useDispatch,useNavigate etc.) kullanılması gerekiyorsa o Zaman çözüm Bu dosyayı custom hook'a çevirmektir.
@@ -19,7 +18,6 @@ const useApiRequest = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { axiosToken, axiosPublic } = useAxios()
-  const { getFirms } = useStockRequest();
   // const { token } = useSelector((state) => state.auth)
   const login = async (userData) => {
     //   const BASE_URL = "https://10001.fullstack.clarusway.com"
@@ -53,7 +51,6 @@ const useApiRequest = () => {
       navigate("/stock")
     } catch (error) {
       dispatch(fetchFail())
-      toastErrorNotify(error.message);
     }
   }
   const logout = async () => {
@@ -68,19 +65,8 @@ const useApiRequest = () => {
       dispatch(fetchFail())
     }
   }
-  const createFirm = async (createNewFirm) => {
-    try {
-      await axiosToken.post("/firms/", createNewFirm);
-      getFirms();
-      console.log("first");
-      toastSuccessNotify("Firm Succesfully created.");
-    } catch (error) {
-      dispatch(fetchFail());
-      toastErrorNotify(error.message);
-    }
-  };
 
-  return { login, register, logout, createFirm }
+  return { login, register, logout }
 }
 
 export default useApiRequest

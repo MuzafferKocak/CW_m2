@@ -1,91 +1,50 @@
 import { useEffect } from "react";
+// import useAxios from "../services/useAxios"
 import useStockRequest from "../services/useStockRequest";
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
-import { Button } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import FirmCard from "../components/FirmCard";
+
+// export const getFirms = async () => {
+//   try {
+//     const { data } = axiosToken("/firms")
+//     console.log(data)
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
 const Firms = () => {
-  const { getFirms } = useStockRequest();
-  const data = useSelector((item) => item.firms.firms);
-
-  console.log(data);
+  // const { axiosToken } = useAxios()
+  // const { getFirms, getSales } = useStockRequest()
+  const { getStock } = useStockRequest();
+  const { firms } = useSelector((state) => state.stock);
 
   useEffect(() => {
-    getFirms();
+    // getFirms()
+    // getSales()
+    // getStock("sales")
+    getStock("firms");
   }, []);
 
   return (
-    <>
-<Typography textAlign="center" padding="10px" margin="15px">FIRMS</Typography>
-<Button sx={{
-  color:"white",
-  backgroundColor: "gray",
-  padding: "10px",
-  marginBottom: "20px"
-}}>NEW FIRM</Button>
-<Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexWrap: "wrap",
-        gap: "2.5rem",
-        
+    <div>
+      <Typography variant="h4" color={"error"} mb={2}>
+        Firms
+      </Typography>
 
-      }}
-    >
-    
-      {data?.map((firm) => (
-        <Card
-          key={firm.name}
-          sx={{
-            maxWidth: 365,
-            height:"380px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            padding: "1rem",
-            borderRadius: "8px",
-          }}
-        >
-          <Typography gutterBottom variant="h5" component="div">
-            {firm.name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" margin="10px">
-              {firm.address}
-            </Typography>
-          <CardMedia
-            sx={{ height: 140, objectFit: "contain", maxHeight: "140px" }}
-            image={firm.image}
-            component="img"
-          />
-          <CardContent>
-            
-            <Typography textAlign="center" margin="10px">{firm.phone}</Typography>
-          </CardContent>
-          <CardActions >
-            <IconButton size="small">
-              <EditIcon />
-            </IconButton>
-            <IconButton size="small">
-              <DeleteIcon />
-            </IconButton>
-          </CardActions>
-        </Card>
-      ))}
-    </Box>
-    </>
-    
-    
+      <Button variant="contained">New Firm</Button>
+
+      <Grid container gap={2} mt={3} justifyContent={"center"}>
+        {firms.map((firm) => (
+          <Grid item key={firm._id}>
+            <FirmCard firm={firm} />
+          </Grid>
+        ))}
+      </Grid>
+    </div>
   );
 };
 
