@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 // import useAxios from "../services/useAxios"
-import useStockRequest from "../services/useStockRequest";
-import { useSelector } from "react-redux";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import FirmCard from "../components/FirmCard";
-import BasicModal from "../components/firmsModal";
-
-
-
+import useStockRequest from "../services/useStockRequest"
+import { useSelector } from "react-redux"
+import Typography from "@mui/material/Typography"
+import Button from "@mui/material/Button"
+import Grid from "@mui/material/Grid"
+import FirmCard from "../components/FirmCard"
+import FirmModal from "../components/FirmModal"
 
 // export const getFirms = async () => {
 //   try {
@@ -23,27 +20,34 @@ import BasicModal from "../components/firmsModal";
 const Firms = () => {
   // const { axiosToken } = useAxios()
   // const { getFirms, getSales } = useStockRequest()
-  const { getStock } = useStockRequest();
-  const { firms } = useSelector((state) => state.stock);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedFirmId, setSelectedFirmId] = useState(null);
-;
+  const { getStock } = useStockRequest()
+  const { firms } = useSelector((state) => state.stock)
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
 
-  const handleOpenModal = (firmId) => {
-    setIsModalOpen(true);
-    setSelectedFirmId(firmId);
-  };
+  const [info, setInfo] = useState({
+    name: "",
+    phone: "",
+    image: "",
+    address: "",
+  })
 
-  const handleCloseModal = ()=> {
-    setIsModalOpen(false)
+  const handleClose = () => {
+    setOpen(false)
+    setInfo({
+      name: "",
+      phone: "",
+      image: "",
+      address: "",
+    })
   }
 
   useEffect(() => {
     // getFirms()
     // getSales()
     // getStock("sales")
-    getStock("firms");
-  }, []);
+    getStock("firms")
+  }, [])
 
   return (
     <div>
@@ -51,18 +55,26 @@ const Firms = () => {
         Firms
       </Typography>
 
-      <Button variant="contained" onClick={handleOpenModal}>New Firm</Button>
+      <Button variant="contained" onClick={handleOpen}>
+        New Firm
+      </Button>
+
+      <FirmModal
+        handleClose={handleClose}
+        open={open}
+        info={info}
+        setInfo={setInfo}
+      />
 
       <Grid container gap={2} mt={3} justifyContent={"center"}>
         {firms.map((firm) => (
           <Grid item key={firm._id}>
-            <FirmCard firm={firm} openModal={handleOpenModal} />
+            <FirmCard firm={firm} handleOpen={handleOpen} setInfo={setInfo} />
           </Grid>
         ))}
       </Grid>
-      <BasicModal open={isModalOpen} handleClose={handleCloseModal} selectedFirmId={selectedFirmId} />
     </div>
-  );
-};
+  )
+}
 
-export default Firms;
+export default Firms
