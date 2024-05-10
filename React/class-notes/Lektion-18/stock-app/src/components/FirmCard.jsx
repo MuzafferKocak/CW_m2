@@ -9,12 +9,18 @@ import EditIcon from "@mui/icons-material/Edit"
 import { btnStyle } from "../styles/globalStyles"
 import useStockRequest from "../services/useStockRequest"
 
-export default function FirmCard({ firm }) {
+export default function FirmCard({ firm, openModal }) {
   //   const btnStyle = {
   //     "&:hover": { color: "red", cursor: "pointer" },
   //   }
   const { address, _id, name, phone, image } = firm
   const { deleteStock } = useStockRequest()
+
+  const handleEditClick = () => {
+    // Edit butonuna tıklandığında modalı aç
+    openModal(_id);
+  };
+
   return (
     <Card
       sx={{
@@ -45,7 +51,7 @@ export default function FirmCard({ firm }) {
           sx={btnStyle}
           onClick={() => deleteStock("firms", _id)}
         />
-        <EditIcon sx={btnStyle} />
+        <EditIcon sx={btnStyle} onClick={handleEditClick} />
       </CardActions>
     </Card>
   )
