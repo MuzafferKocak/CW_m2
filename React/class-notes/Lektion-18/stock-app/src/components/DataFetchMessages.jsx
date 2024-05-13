@@ -9,7 +9,7 @@ export const ErrorMessage = () => {
 };
 
 export const NoDataMessage = ()=> {
-    return <Alert severity="warning">Gösterilecek veri bulunamadı</Alert>;
+    return <Alert severity="warning">Gösterilecek veri bulunamadi</Alert>;
 }
 
 const TableSkeleton = () => {
