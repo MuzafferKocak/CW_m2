@@ -1,38 +1,31 @@
-import { useEffect, useState } from "react"
-import useStockRequest from "../services/useStockRequest"
-import { useSelector } from "react-redux"
-import Typography from "@mui/material/Typography"
-import Button from "@mui/material/Button"
-// import Grid from "@mui/material/Grid"
-import ProductModal from "../components/ProductModal"
-import ProductTable from "../components/ProductTable"
+import { useEffect, useState } from "react";
+import useStockRequest from "../services/useStockRequest";
+// import { useSelector } from "react-redux"
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import ProductModal from "../components/ProductModal";
+import ProductTable from "../components/ProductTable";
+import { useSelector } from "react-redux";
+import TableSkeleton, { ErrorMessage } from "../components/DataFetchMessages";
 
-const Firms = () => {
-  const { getStock } = useStockRequest()
-  const { firms } = useSelector((state) => state.stock)
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
+const Products = () => {
+  const { getStock } = useStockRequest();
+  const { error, loading } = useSelector((state) => state.stock);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
 
-  const [info, setInfo] = useState({
-    name: "",
-    phone: "",
-    image: "",
-    address: "",
-  })
+  const initialState = { categoryId: "", brandId: "", name: "" };
+  const [info, setInfo] = useState(initialState);
 
   const handleClose = () => {
-    setOpen(false)
-    setInfo({
-      name: "",
-      phone: "",
-      image: "",
-      address: "",
-    })
-  }
-
+    setOpen(false);
+    setInfo(initialState);
+  };
   useEffect(() => {
-    getStock("products")
-  }, [])
+    getStock("products");
+    getStock("categories");
+    getStock("brands");
+  }, []);
 
   return (
     <div>
@@ -40,20 +33,25 @@ const Firms = () => {
         Products
       </Typography>
 
-      <Button variant="contained" onClick={handleOpen} sx={{ mb: 3 }}>
+      <Button
+        variant="contained"
+        onClick={handleOpen}
+        sx={{ mb: 3 }}
+        disabled={error}
+      >
         New Product
       </Button>
-
+      {loading && <TableSkeleton />}
+      {error && <ErrorMessage />}
+      {!error && !loading && <ProductTable />}
       <ProductModal
         handleClose={handleClose}
         open={open}
         info={info}
         setInfo={setInfo}
       />
-
-      <ProductTable />
     </div>
-  )
-}
+  );
+};
 
-export default Firms
+export default Products;
