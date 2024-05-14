@@ -1,20 +1,20 @@
-import * as React from "react"
-import Card from "@mui/material/Card"
-import CardActions from "@mui/material/CardActions"
-import CardContent from "@mui/material/CardContent"
-import CardMedia from "@mui/material/CardMedia"
-import Typography from "@mui/material/Typography"
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
-import EditIcon from "@mui/icons-material/Edit"
-import { btnStyle } from "../styles/globalStyles"
-import useStockRequest from "../services/useStockRequest"
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EditIcon from "@mui/icons-material/Edit";
+import { btnStyle } from "../styles/globalStyles";
+import useStockRequest from "../services/useStockRequest";
 
 export default function FirmCard({ firm, handleOpen, setInfo }) {
   //   const btnStyle = {
   //     "&:hover": { color: "red", cursor: "pointer" },
   //   }
   // const { address, _id, name, phone, image } = firm
-  const { deleteStock } = useStockRequest()
+  const { deleteStock } = useStockRequest();
   return (
     <Card
       sx={{
@@ -28,7 +28,12 @@ export default function FirmCard({ firm, handleOpen, setInfo }) {
         p: 2,
       }}
     >
-      <CardMedia component="img" alt={firm?.name} height="140" image={firm?.image} />
+      <CardMedia
+        sx={{ p: 1, objectFit: "contain", height: "250px" }}
+        component="img"
+        alt={firm?.name}
+        image={firm?.image}
+      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {firm?.name}
@@ -48,11 +53,11 @@ export default function FirmCard({ firm, handleOpen, setInfo }) {
         <EditIcon
           sx={btnStyle}
           onClick={() => {
-            handleOpen()
-            setInfo(firm)
+            handleOpen();
+            setInfo(firm);
           }}
         />
       </CardActions>
     </Card>
-  )
+  );
 }

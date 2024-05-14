@@ -1,31 +1,31 @@
-import Button from "@mui/material/Button"
-import Box from "@mui/material/Box"
-import TextField from "@mui/material/TextField"
-import Modal from "@mui/material/Modal"
-import useStockRequest from "../services/useStockRequest"
-import { modalStyle } from "../styles/globalStyles"
-import InputLabel from "@mui/material/InputLabel"
-import MenuItem from "@mui/material/MenuItem"
-import FormControl from "@mui/material/FormControl"
-import Select from "@mui/material/Select"
-import { useSelector } from "react-redux"
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Modal from "@mui/material/Modal";
+import useStockRequest from "../services/useStockRequest";
+import { modalStyle } from "../styles/globalStyles";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { useSelector } from "react-redux";
 
 export default function ProductModal({ handleClose, open, info, setInfo }) {
-  const { postStock } = useStockRequest()
-  const { categories, brands } = useSelector((state) => state.stock)
+  const { postStock } = useStockRequest();
+  const { categories, brands } = useSelector((state) => state.stock);
 
   const handleChange = (e) => {
-    setInfo({ ...info, [e.target.name]: e.target.value })
-  }
+    setInfo({ ...info, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    postStock("products", info)
+    e.preventDefault();
+    postStock("products", info);
     //? modal ı kapıtıyoruz
-    handleClose()
-  }
+    handleClose();
+  };
 
-  console.log(categories)
+  console.log(categories);
   return (
     <div>
       <Modal
@@ -95,5 +95,5 @@ export default function ProductModal({ handleClose, open, info, setInfo }) {
         </Box>
       </Modal>
     </div>
-  )
+  );
 }

@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 // import useAxios from "../services/useAxios"
-import useStockRequest from "../services/useStockRequest"
-import { useSelector } from "react-redux"
-import Typography from "@mui/material/Typography"
-import Button from "@mui/material/Button"
-import Grid from "@mui/material/Grid"
-import FirmCard from "../components/FirmCard"
-import FirmModal from "../components/FirmModal"
+import useStockRequest from "../services/useStockRequest";
+import { useSelector } from "react-redux";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import FirmCard from "../components/FirmCard";
+import FirmModal from "../components/FirmModal";
 import TableSkeleton, {
   CardSkeleton,
   ErrorMessage,
   NoDataMessage,
-} from "../components/DataFetchMessages"
+} from "../components/DataFetchMessages";
 
 // export const getFirms = async () => {
 //   try {
@@ -25,34 +25,34 @@ import TableSkeleton, {
 const Firms = () => {
   // const { axiosToken } = useAxios()
   // const { getFirms, getSales } = useStockRequest()
-  const { getStock } = useStockRequest()
-  const { firms, loading, error } = useSelector((state) => state.stock)
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
+  const { getStock } = useStockRequest();
+  const { firms, loading, error } = useSelector((state) => state.stock);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
 
   const [info, setInfo] = useState({
     name: "",
     phone: "",
     image: "",
     address: "",
-  })
+  });
 
   const handleClose = () => {
-    setOpen(false)
+    setOpen(false);
     setInfo({
       name: "",
       phone: "",
       image: "",
       address: "",
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     // getFirms()
     // getSales()
     // getStock("sales")
-    getStock("firms")
-  }, [])
+    getStock("firms");
+  }, []);
 
   return (
     <div>
@@ -89,7 +89,7 @@ const Firms = () => {
         setInfo={setInfo}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Firms
+export default Firms;
