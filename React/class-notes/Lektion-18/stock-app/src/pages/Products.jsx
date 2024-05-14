@@ -1,33 +1,35 @@
-import { useEffect, useState } from "react";
-import useStockRequest from "../services/useStockRequest";
-// import { useSelector } from "react-redux"
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import ProductModal from "../components/ProductModal";
-import ProductTable from "../components/ProductTable";
-import { useSelector } from "react-redux";
-import TableSkeleton, { ErrorMessage, NoDataMessage } from "../components/DataFetchMessages";
+import { useEffect, useState } from "react"
+import useStockRequest from "../services/useStockRequest"
+import Typography from "@mui/material/Typography"
+import Button from "@mui/material/Button"
+import ProductModal from "../components/ProductModal"
+import ProductTable from "../components/ProductTable"
+import { useSelector } from "react-redux"
+import TableSkeleton, {
+  ErrorMessage,
+  NoDataMessage,
+} from "../components/DataFetchMessages"
 
 const Products = () => {
-  const { getStock } = useStockRequest();
-  const { error, loading } = useSelector((state) => state.stock);
-  const {products}= useSelector((state)=> state.stock)
+  const { getStock } = useStockRequest()
+  const { error, loading } = useSelector((state) => state.stock)
+  const { products } = useSelector((state) => state.stock)
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
 
-  const initialState = { categoryId: "", brandId: "", name: "" };
-  const [info, setInfo] = useState(initialState);
+  const initialState = { categoryId: "", brandId: "", name: "" }
+  const [info, setInfo] = useState(initialState)
 
   const handleClose = () => {
-    setOpen(false);
-    setInfo(initialState);
-  };
+    setOpen(false)
+    setInfo(initialState)
+  }
   useEffect(() => {
-    getStock("products");
-    getStock("categories");
-    getStock("brands");
-  }, []);
+    getStock("products")
+    getStock("categories")
+    getStock("brands")
+  }, [])
 
   return (
     <div>
@@ -43,10 +45,11 @@ const Products = () => {
       >
         New Product
       </Button>
+
       {loading && <TableSkeleton />}
       {error && <ErrorMessage />}
-      {!error && !loading && products.length>0 && <ProductTable />}
-      {!error && !products.length && <NoDataMessage/>}
+      {!error && !loading && products.length > 0 && <ProductTable />}
+      {!error && !products.length && <NoDataMessage />}
       <ProductModal
         handleClose={handleClose}
         open={open}
@@ -54,7 +57,7 @@ const Products = () => {
         setInfo={setInfo}
       />
     </div>
-  );
-};
+  )
+}
 
-export default Products;
+export default Products
