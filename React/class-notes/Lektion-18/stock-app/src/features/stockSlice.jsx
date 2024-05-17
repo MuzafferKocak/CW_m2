@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   purchases: [],
@@ -9,15 +9,15 @@ const initialState = {
   categories: [],
   loading: false,
   error: false,
-};
+}
 
 const stockSlice = createSlice({
   name: "stock",
   initialState,
   reducers: {
     fetchStart: (state) => {
-      state.loading = true;
-      state.error = false;
+      state.loading = true
+      state.error = false
     },
     // getFirmsSuccess: (state, { payload }) => {
     //   state.loading = false
@@ -35,23 +35,44 @@ const stockSlice = createSlice({
     // },
 
     getStockSuccess: (state, { payload: { path, stockData } }) => {
-      state.loading = false;
-      state[path] = stockData;
+      state.loading = false
+      state[path] = stockData
       // state.error = false
     },
+
+    getProPurBraFirmSuccess: (state, { payload }) => {
+      state.loading = false
+      state.products = payload?.products
+      state.purchases = payload?.purchases
+      state.brands = payload?.brands
+      state.firms = payload?.firms
+    },
+      //? böylede yapabiliyoruz
+    // getProPurBraFirmSuccess: (
+    //   state,
+    //   { payload: { products, purchases, firms, brands } }
+    // ) => {
+    //   state.loading = false
+    //   state.products = products
+    //   state.purchases = purchases
+    //   state.brands = brands
+    //   state.firms = firms
+    // },
+
     fetchFail: (state) => {
-      state.loading = false;
-      state.error = true;
+      state.loading = false
+      state.error = true
     },
   },
-});
+})
 
 export const {
   fetchStart,
   getFirmsSuccess,
   getSalesSuccess,
   getStockSuccess,
+  getProPurBraFirmSuccess,
   fetchFail,
-} = stockSlice.actions;
+} = stockSlice.actions
 
-export default stockSlice.reducer;
+export default stockSlice.reducer
