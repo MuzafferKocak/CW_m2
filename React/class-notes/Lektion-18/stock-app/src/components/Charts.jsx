@@ -8,12 +8,12 @@ const Charts = () => {
   const { sales, purchases } = useSelector((state) => state.stock)
 
   const salesData = sales?.map((item) => ({
-    date: new Date(item.createdAt).toLocaleDateString("tr-TR"),
+    date: new Date(item.createdAt).toLocaleDateString("de-DE"),
     amount: item.amount,
   }))
 
   const purchasesData = purchases?.map((item) => ({
-    date: new Date(item.createdAt).toLocaleDateString("tr-TR"),
+    date: new Date(item.createdAt).toLocaleDateString("de-DE"),
     amount: item.amount,
   }))
   console.log(salesData)
