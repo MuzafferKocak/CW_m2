@@ -1,5 +1,10 @@
-let myTuple3;
-myTuple3 = [[1, 'john'], [2, 'Smith']];
-myTuple3.push(['jane', 4]);
-myTuple3.push([4, 'jane']);
-myTuple3.push(false);
+let d = 4;
+d = "merheba";
+d = false;
+let anyArray = [1, "selam"];
+anyArray.push(true);
+let e = d;
+let notSure = 4;
+notSure = "selam";
+console.log(notSure.length);
+console.log(notSure.length);

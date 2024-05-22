@@ -7,7 +7,6 @@ let x = 5 // X'in değeri 5
 const y = 'Hello'
 const z = (a,b,c)=> a+b */
 
-
 //! Type Annotation
 
 /* let a : number = 5
@@ -40,7 +39,6 @@ num.push('4')
 
 let bosArray: string[] = [] // Boş array tanımlama */
 
-
 //! Tuples
 
 /* let myTuple : [number, boolean, string]
@@ -70,3 +68,97 @@ myTuple3 = [[1, 'john'],[2, 'Smith']]
 myTuple3.push(['jane',4]) // hata
 myTuple3.push([4,'jane']) // ok
 myTuple3.push(false) //hata */
+
+//! Enum
+
+const enum Color {
+  Red,
+  Green,
+  Blue,
+}
+
+/* Const koymadan js tarafi 
+var Color;
+(function (Color) {
+    Color[Color["Red"] = 0] = "Red";
+    Color[Color["Green"] = 1] = "Green";
+    Color[Color["Blue"] = 2] = "Blue";
+})(Color || (Color = {}));
+let selectedColor = Color.Blue;
+console.log(selectedColor);*/ 
+
+// let selectedColor: Color = Color.Blue;
+
+// console.log(selectedColor);
+
+
+// enum Tshirt {
+//     Small = "S",
+//     Medium = "M",
+//     Large = "L"
+// }
+
+// let userSize : Tshirt = Tshirt.Small
+
+// console.log(userSize);
+
+
+// enum StatusCodes {
+//     NotFound = 404,
+//     Success = 200,
+//     Accepted = Success + 2,
+//     BadRequest = NotFound -4,
+//     ServerErrors
+
+// }
+
+// console.log(StatusCodes.ServerErrors);
+
+
+// //! Any Type
+
+// let d : any = 4
+// d= "merheba"
+// d = false
+
+// let anyArray: any [] = [1, "selam"]
+
+// anyArray.push(true)
+
+// let e : boolean = d
+
+//! UNknown
+
+// let notSure: unknown = 4
+// notSure = "selam"
+
+// console.log((notSure as string).length);  //*allias yöntemi
+// console.log((<string>notSure).length);  //* generic yöntem
+
+
+//! Void return icermeyen fonksiyonlarin dönüs tipi
+
+// let f : number = 100
+
+// function increase () : void{
+//     console.log(f);
+//     f++
+// }
+
+// increase()
+
+//! Never hic bir zaman geri dönüsü olmayacak durumlar icin
+
+// function endlessLoop (): never {
+//     while(true){
+//         console.log("Hello");
+//     }
+// }
+
+//! Union Type
+
+// let g : string | number = 100
+
+// g= "Merhaba"
+
+// g = true //* Compiler
