@@ -85,12 +85,11 @@ var Color;
     Color[Color["Blue"] = 2] = "Blue";
 })(Color || (Color = {}));
 let selectedColor = Color.Blue;
-console.log(selectedColor);*/ 
+console.log(selectedColor);*/
 
 // let selectedColor: Color = Color.Blue;
 
 // console.log(selectedColor);
-
 
 // enum Tshirt {
 //     Small = "S",
@@ -102,7 +101,6 @@ console.log(selectedColor);*/
 
 // console.log(userSize);
 
-
 // enum StatusCodes {
 //     NotFound = 404,
 //     Success = 200,
@@ -113,7 +111,6 @@ console.log(selectedColor);*/
 // }
 
 // console.log(StatusCodes.ServerErrors);
-
 
 // //! Any Type
 
@@ -134,7 +131,6 @@ console.log(selectedColor);*/
 
 // console.log((notSure as string).length);  //*allias yöntemi
 // console.log((<string>notSure).length);  //* generic yöntem
-
 
 //! Void return icermeyen fonksiyonlarin dönüs tipi
 
@@ -162,3 +158,105 @@ console.log(selectedColor);*/
 // g= "Merhaba"
 
 // g = true //* Compiler
+
+//? Type narrowing
+
+// function checkNumber(n: string | number): void {
+//   if (typeof n == "number") {
+//     console.log(n ** 2);
+//   } else {
+//     console.log(n.length);
+//   }
+// }
+
+// checkNumber(2);
+// checkNumber("TypeScript");
+
+//! Type Aliases
+
+// type YeniBirType = number | string
+
+// let h: YeniBirType = 3
+
+// h = "selam"
+
+// h= false //* Error
+
+// let k: YeniBirType =  "merhaba"
+
+//? Objects
+
+// const car: {
+//   make: string,
+//   model: string,
+//   year: number
+//   readonly lastKM: number
+//   features:string[]
+// }={
+//   make: "Toyota",
+//   model: "Corolla",
+//   year: 2020,
+//   lastKM:10000,
+//   features: ["sunroof", "A/C" ]
+
+// }
+
+// car.make = "Audi"
+// car.make = false //*Error
+
+// car.age = 4 //*Error ekleme yapilmiyor
+// car.year = 2021
+// car.lastKM =11000
+
+// type Car2 = {
+//   make: string,
+//   model: string,
+//   year: number
+//   readonly lastKM: number
+
+// }
+
+// const yeniArac: Car2 = {
+//   make: "Toyota",
+//   model: "Corolla",
+//   year: 2020,
+//   lastKM:10000,
+
+// }
+
+//! String Literals
+
+// type Car3 = "Fiat" | "BMW" | "Mercedes" | 2000
+
+// let Car4: Car3 = "Fiat"
+// let Car5: Car3 = "BMW"
+// let Car6: Car3 = "Audi" //* Error
+// let Car7: Car3 = 2000
+
+//! Intersection
+
+// type Book = {
+//   book_id: number;
+//   book_name: string;
+// };
+
+// type Author = {
+//   readonly author_id: number;
+//   Author_name: string;
+// };
+
+// type Product = Book & Author;
+
+// const book1: Product = {
+//   book_id: 1234,
+//   Author_name: "Tolkien",
+//   book_name: "Silmarillion",
+//   author_id: 1892,
+// };
+
+// book1.book_id = 1235;
+// book1.author_id = 1893;  //* Error
+
+//! Type Assertions
+
+

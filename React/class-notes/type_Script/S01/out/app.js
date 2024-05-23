@@ -1,10 +1,6 @@
-let d = 4;
-d = "merheba";
-d = false;
-let anyArray = [1, "selam"];
-anyArray.push(true);
-let e = d;
-let notSure = 4;
-notSure = "selam";
-console.log(notSure.length);
-console.log(notSure.length);
+const book1 = {
+    book_id: 1234,
+    Author_name: "Tolkien",
+    book_name: "Silmarillion",
+    author_id: 1892
+};
