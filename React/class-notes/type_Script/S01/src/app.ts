@@ -257,6 +257,67 @@ console.log(selectedColor);*/
 // book1.book_id = 1235;
 // book1.author_id = 1893;  //* Error
 
-//! Type Assertions
+//! Functions
+
+// function selamla (mesaj: string, isim:string):string{
+//   return `${mesaj + "" + isim}`
+// }
+// console.log(selamla("Günaydin", "Ahmet"));
+
+// selamla("Ahmet") //* Error
+// selamla("mehaba", "Ahmet", "nasilsin") //*Error
+
+// selamla(123, "Ahmet")
+
+//? Arrow functions
+// let multiply = (x: number, y: number): number => {
+//   return x * y;
+// };
+
+//? Optional parameters
+
+// function selamla2(mesaj: string, isim?: string): string {
+//   return `${mesaj + "" + isim}`;
+// }
+
+// console.log(selamla2("Günaydin", "Ahmet"));
+// console.log(selamla2("Günaydin"));
+
+//? Overloading
+
+// function greet (name:string):string;
+// function greet (name:string, age:number):string
+// function greet (name: string, age?:number):string{
+//     if (age !== undefined) {
+//         return `Hello my name is ${name} and I am ${age} years old.`;
+//     }else{
+//         return `Hello my name is ${name}.`
+//     }
+// }
+
+// console.log(greet('Mark'))
+// console.log(greet('Mark', 40))
+// console.log(greet('Mark', 40 )) //* Error
 
 
+//? rest parameters
+
+// function selamla4 (mesaj:string, ...isimler:string[]):string{
+//   return `${mesaj + " " + isimler.join(", ")+"!"}`
+// }
+// console.log(selamla4("Merhaba"));
+// console.log(selamla4("Merhaba", "Mark"));
+// console.log(selamla4("Merhaba", "Mark", "Anthony"));
+
+
+// function topla(num1:number, ...numbers:number[]){
+
+//   let total = num1;
+//   numbers.forEach(num => total += num)
+//   console.log(total)
+// }
+
+// topla(5,'Merhaba') //* Error
+// topla(5)
+// topla(5,6)
+// topla(1,2,3,4,5,6,7,8,9,10)
