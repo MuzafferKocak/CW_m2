@@ -1,13 +1,12 @@
 {
-  "name": "intro",
+  "name": "movie-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "server": "json-server --watch db.json --port 8080"
+    "lint": "next lint"
   },
   "dependencies": {
     "@headlessui/react": "^2.0.4",
