@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import GoogleIcon from "/public/icons/GoogleIcons";
+import GoogleIcon from "../../../../public/icons/GoogleIcons";
+import { useAuthContext } from "@/context/AuthContext";
 
 const Register = () => {
   const [info, setInfo] = useState({
@@ -9,12 +10,17 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const { createUser, signUpProvider } = useAuthContext();
+
   const handleChange = (e) =>
     setInfo({ ...info, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ info });
+    const { firstName, lastName, email, password } = info;
+    const displayName = `${firstName} ${lastName}`;
+    createUser(email, password, displayName);
+    // console.log({ info });
   };
   return (
     <div className="relative h-screen w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
@@ -75,6 +81,7 @@ const Register = () => {
               <button
                 className="flex justify-between text-center items-center btn-danger"
                 type="button"
+                onClick={() => signUpProvider()}
               >
                 Continue with Google
                 <GoogleIcon color="currentColor" />
